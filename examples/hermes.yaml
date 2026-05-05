@@ -1,0 +1,6 @@
+mcp_servers:
+  google_ads_intent:
+    command: google-ads-intent-mcp
+    args: []
+    sampling:
+      enabled: false

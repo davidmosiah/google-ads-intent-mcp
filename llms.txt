@@ -1,0 +1,20 @@
+# Google Ads Intent MCP
+
+Dry-run-first Google Ads search-term intent analyzer with CLI and optional MCP server.
+
+Repository: https://github.com/davidmosiah/google-ads-intent-mcp
+Install: pipx install "git+https://github.com/davidmosiah/google-ads-intent-mcp.git"
+MCP command: google-ads-intent-mcp
+
+Core tools:
+- google_ads_agent_manifest
+- google_ads_connection_status
+- google_ads_privacy_audit
+- google_ads_classify_search_term
+- google_ads_analyze_search_terms
+- google_ads_build_negative_plan
+
+Safety:
+- CSV analysis is local.
+- Negative plans are dry-run only.
+- Live Google Ads mutation is intentionally not automatic in v0.1.

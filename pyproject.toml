@@ -10,8 +10,17 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 authors = [{ name = "David Mosiah" }]
-keywords = ["ai-agents", "mcp", "google-ads", "search-terms", "negative-keywords", "ppc"]
+keywords = ["ai-agents", "agent-tools", "agentic-workflows", "mcp", "mcp-server", "google-ads", "search-terms", "negative-keywords", "ppc", "local-first"]
 dependencies = []
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Office/Business",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
 
 [project.optional-dependencies]
 mcp = ["mcp>=1.13.0"]

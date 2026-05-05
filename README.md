@@ -1,8 +1,11 @@
 # Google Ads Intent MCP
 
 [![CI](https://github.com/davidmosiah/google-ads-intent-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/davidmosiah/google-ads-intent-mcp/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 Dry-run-first Google Ads search-term intent analyzer for agents. It helps Codex, Claude, Cursor, Hermes, OpenClaw and other MCP clients classify search terms, protect buyer intent and draft negative-keyword plans from CSV exports before any live account change.
+
+Use it when an agent needs to reduce wasted spend without accidentally excluding buyer-intent queries.
 
 ## Why It Exists
 
@@ -62,6 +65,24 @@ Recommended first calls:
 2. `google_ads_privacy_audit`
 3. `google_ads_analyze_search_terms`
 4. `google_ads_build_negative_plan`
+
+## Agent Surfaces
+
+| Tool | Purpose |
+|---|---|
+| `google_ads_agent_manifest` | Install/runtime guidance for agent clients |
+| `google_ads_connection_status` | CSV/API readiness without credentials |
+| `google_ads_privacy_audit` | Dry-run, account and export boundaries |
+| `google_ads_classify_search_term` | Single-query intent classification |
+| `google_ads_analyze_search_terms` | Batch CSV-style analysis |
+| `google_ads_build_negative_plan` | Dry-run negative keyword plan |
+
+## Copy-Paste Agent Prompt
+
+```text
+Use google-ads-intent-mcp. First call google_ads_connection_status and google_ads_privacy_audit.
+Analyze the search terms, protect buyer/conversion queries, and return a dry-run negative plan only.
+```
 
 ## CSV Format
 
