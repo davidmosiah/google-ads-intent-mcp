@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "google-ads-intent-mcp"
+version = "0.1.0"
+description = "Dry-run-first Google Ads search-term intent analyzer with CLI and optional MCP server."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "David Mosiah" }]
+keywords = ["ai-agents", "mcp", "google-ads", "search-terms", "negative-keywords", "ppc"]
+dependencies = []
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.13.0"]
+google-ads = ["google-ads>=29.0.0", "google-auth-oauthlib>=1.0.0", "pyyaml>=6.0"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+google-ads-intent = "google_ads_intent_mcp.cli:main"
+google-ads-intent-mcp = "google_ads_intent_mcp.mcp_server:main"
+
+[project.urls]
+Homepage = "https://github.com/davidmosiah/google-ads-intent-mcp"
+Repository = "https://github.com/davidmosiah/google-ads-intent-mcp"
+Issues = "https://github.com/davidmosiah/google-ads-intent-mcp/issues"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.env
+credentials/
+google-ads.yaml
+token.json
+dist/
+build/
+*.egg-info/
+.DS_Store
