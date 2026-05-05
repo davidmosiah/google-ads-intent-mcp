@@ -1,5 +1,7 @@
 # Google Ads Intent MCP
 
+[![CI](https://github.com/davidmosiah/google-ads-intent-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/davidmosiah/google-ads-intent-mcp/actions/workflows/ci.yml)
+
 Dry-run-first Google Ads search-term intent analyzer for agents. It helps Codex, Claude, Cursor, Hermes, OpenClaw and other MCP clients classify search terms, protect buyer intent and draft negative-keyword plans from CSV exports before any live account change.
 
 ## Why It Exists
@@ -15,14 +17,16 @@ Google Ads cleanup is risky when agents act directly on accounts. This package m
 ## Install
 
 ```bash
-pipx install google-ads-intent-mcp
+pipx install "git+https://github.com/davidmosiah/google-ads-intent-mcp.git"
 ```
 
 With MCP support:
 
 ```bash
-pipx install "google-ads-intent-mcp[mcp]"
+pipx install "git+https://github.com/davidmosiah/google-ads-intent-mcp.git#egg=google-ads-intent-mcp[mcp]"
 ```
+
+PyPI artifacts are build-ready. Registry publish is pending a PyPI API token or trusted-publishing setup.
 
 ## CLI
 
