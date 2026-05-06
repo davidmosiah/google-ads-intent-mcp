@@ -1,7 +1,11 @@
 # Google Ads Intent MCP
 
+[![GitHub stars](https://img.shields.io/github/stars/davidmosiah/google-ads-intent-mcp?style=flat-square&logo=github)](https://github.com/davidmosiah/google-ads-intent-mcp/stargazers)
 [![CI](https://github.com/davidmosiah/google-ads-intent-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/davidmosiah/google-ads-intent-mcp/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Agent-first](https://img.shields.io/badge/agent--first-MCP-0ea5a3?style=flat-square)](https://github.com/davidmosiah/google-ads-intent-mcp)
+
+> If this agent-first tool helps your workflow, please star the repo. Stars make this agent-first tooling easier for other builders to discover and help Delx keep shipping open infrastructure.
 
 Dry-run-first Google Ads search-term intent analyzer for agents. It helps Codex, Claude, Cursor, Hermes, OpenClaw and other MCP clients classify search terms, protect buyer intent and draft negative-keyword plans from CSV exports before any live account change.
 
