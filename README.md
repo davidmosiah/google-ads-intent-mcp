@@ -24,16 +24,16 @@ Google Ads cleanup is risky when agents act directly on accounts. This package m
 ## Install
 
 ```bash
-pipx install "git+https://github.com/davidmosiah/google-ads-intent-mcp.git"
+pipx install google-ads-intent-mcp
 ```
 
 With MCP support:
 
 ```bash
-pipx install "git+https://github.com/davidmosiah/google-ads-intent-mcp.git#egg=google-ads-intent-mcp[mcp]"
+pipx install "google-ads-intent-mcp[mcp]"
 ```
 
-PyPI release automation is configured with Trusted Publishing. See [docs/pypi-publishing.md](docs/pypi-publishing.md) for the one-time PyPI pending-publisher setup.
+Published on PyPI: [`google-ads-intent-mcp`](https://pypi.org/project/google-ads-intent-mcp/). Release automation uses PyPI Trusted Publishing, so GitHub Actions can publish future versions without long-lived PyPI tokens. See [docs/pypi-publishing.md](docs/pypi-publishing.md).
 
 ## CLI
 

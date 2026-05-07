@@ -3,7 +3,9 @@
 Dry-run-first Google Ads search-term intent analyzer with CLI and optional MCP server.
 
 Repository: https://github.com/davidmosiah/google-ads-intent-mcp
-Install: pipx install "git+https://github.com/davidmosiah/google-ads-intent-mcp.git"
+PyPI: https://pypi.org/project/google-ads-intent-mcp/
+Install: pipx install google-ads-intent-mcp
+Install with MCP extras: pipx install "google-ads-intent-mcp[mcp]"
 MCP command: google-ads-intent-mcp
 
 Core tools:
