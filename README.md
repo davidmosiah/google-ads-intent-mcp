@@ -33,7 +33,7 @@ With MCP support:
 pipx install "git+https://github.com/davidmosiah/google-ads-intent-mcp.git#egg=google-ads-intent-mcp[mcp]"
 ```
 
-PyPI artifacts are build-ready. Registry publish is pending a PyPI API token or trusted-publishing setup.
+PyPI release automation is configured with Trusted Publishing. See [docs/pypi-publishing.md](docs/pypi-publishing.md) for the one-time PyPI pending-publisher setup.
 
 ## CLI
 
