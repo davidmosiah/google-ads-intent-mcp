@@ -1,6 +1,6 @@
 # Google Ads Intent MCP
 
-Dry-run-first Google Ads search-term intent analyzer with CLI and optional MCP server.
+Dry-run-first Google Ads search-term intent analyzer with CLI and optional MCP server. Built for AI agents managing or auditing search-ads campaigns. Local CSV analysis, no live mutation by default.
 
 Repository: https://github.com/davidmosiah/google-ads-intent-mcp
 PyPI: https://pypi.org/project/google-ads-intent-mcp/
@@ -9,14 +9,31 @@ Install with MCP extras: pipx install "google-ads-intent-mcp[mcp]"
 MCP command: google-ads-intent-mcp
 
 Core tools:
-- google_ads_agent_manifest
-- google_ads_connection_status
-- google_ads_privacy_audit
-- google_ads_classify_search_term
-- google_ads_analyze_search_terms
-- google_ads_build_negative_plan
+- google_ads_agent_manifest — runtime contract, tool list, supported clients
+- google_ads_connection_status — installation health, optional API auth status
+- google_ads_capabilities — supported analyses, locales, intent taxonomy
+- google_ads_privacy_audit — what is read locally vs sent to Google Ads API
+- google_ads_classify_search_term — single-term intent classification (informational, navigational, commercial, transactional, brand)
+- google_ads_analyze_search_terms — batch analyze a CSV/list, returns intent + recommended action
+- google_ads_build_negative_plan — generates a negative-keyword plan from poor-performing terms
+- google_ads_score_search_term_quality — quality + relevance score per term
+
+Optional Google Ads API env vars (only needed if reading account data, not for CSV analysis):
+- GOOGLE_ADS_DEVELOPER_TOKEN
+- GOOGLE_ADS_CLIENT_ID, GOOGLE_ADS_CLIENT_SECRET
+- GOOGLE_ADS_REFRESH_TOKEN
+- GOOGLE_ADS_LOGIN_CUSTOMER_ID
+- GOOGLE_ADS_API_VERSION (defaults to latest stable)
+
+Workflow for agents:
+1. For local CSV input: call google_ads_analyze_search_terms with a CSV path. No API auth needed.
+2. For account-connected reads: ensure env vars set, then call analysis tools — the API is read-only by design.
+3. Negative-keyword plans are always returned as recommendations, never auto-applied.
+4. Use google_ads_score_search_term_quality before recommending bid changes.
 
 Safety:
-- CSV analysis is local.
-- Negative plans are dry-run only.
-- Live Google Ads mutation is intentionally not automatic in v0.1.
+- CSV analysis is local; no data leaves your machine.
+- Negative plans are dry-run only; the agent must show them to the user before any human action.
+- Live Google Ads mutation (campaign create/update/delete) is intentionally NOT available in v0.x.
+- The intent taxonomy is heuristic; treat outputs as suggestions, not absolute classifications.
+- Not affiliated with or endorsed by Google.
