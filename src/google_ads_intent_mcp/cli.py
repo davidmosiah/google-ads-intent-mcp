@@ -13,6 +13,15 @@ from .negatives import build_negative_plan
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="google-ads-intent")
     parser.add_argument("--format", choices=["json", "markdown"], default="json")
+    parser.add_argument(
+        "--llm",
+        action="store_true",
+        help=(
+            "Enable the optional LLM/embeddings classification path "
+            "(off by default; falls back to the heuristic if no backend is configured). "
+            "Can also be enabled via GOOGLE_ADS_INTENT_LLM=1."
+        ),
+    )
     sub = parser.add_subparsers(dest="command", required=True)
 
     manifest = sub.add_parser("manifest")
@@ -33,6 +42,7 @@ def main(argv: list[str] | None = None) -> int:
     plan.add_argument("--level", choices=["campaign", "ad_group"], default="campaign")
 
     args = parser.parse_args(argv)
+    llm = args.llm or None
 
     if args.command == "manifest":
         payload = build_agent_manifest(args.client)
@@ -41,12 +51,12 @@ def main(argv: list[str] | None = None) -> int:
     elif args.command == "privacy-audit":
         payload = build_privacy_audit()
     elif args.command == "classify":
-        payload = classify_search_term(args.term)
+        payload = classify_search_term(args.term, llm=llm)
     elif args.command == "analyze-csv":
-        payload = analyze_search_terms(read_search_terms_csv(args.csv))
+        payload = analyze_search_terms(read_search_terms_csv(args.csv), llm=llm)
     elif args.command == "plan-negatives":
         payload = build_negative_plan(
-            analyze_search_terms(read_search_terms_csv(args.csv)),
+            analyze_search_terms(read_search_terms_csv(args.csv), llm=llm),
             match_type=args.match_type,
             level=args.level,
         )

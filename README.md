@@ -69,6 +69,32 @@ google-ads-intent analyze-csv --csv examples/search_terms.csv
 google-ads-intent plan-negatives --csv examples/search_terms.csv
 ```
 
+### Intent classification
+
+The classifier is a deterministic, dependency-free heuristic with broad,
+cross-vertical signal coverage (ecommerce, B2B/SaaS, local services, health,
+finance, education and more) — not just gaming traffic. It sorts each search
+term into `waste`, `buyer`, `research` or `competitor` intent and protects
+converting queries from being flagged as negatives.
+
+An **optional** LLM/embeddings-backed refinement path is available and is
+**off by default**. It requires no extra dependencies or API keys for normal
+use, and always falls back to the heuristic when no backend is configured:
+
+```bash
+# Opt in via flag (falls back to the heuristic if nothing is configured)
+google-ads-intent --llm classify "crm software pricing"
+
+# Or via environment variable
+GOOGLE_ADS_INTENT_LLM=1 google-ads-intent analyze-csv --csv export.csv
+```
+
+To actually call a backend, set `OPENAI_API_KEY` (and optionally
+`GOOGLE_ADS_INTENT_LLM_MODEL`, default `gpt-4o-mini`) and install the `openai`
+package. Without those, `--llm` is a no-op that keeps the heuristic result.
+Each classification reports which path produced it via a `source`
+(`heuristic` or `llm`) field.
+
 ## MCP
 
 ```bash

@@ -28,16 +28,16 @@ def create_mcp():
         return build_privacy_audit()
 
     @mcp.tool()
-    def google_ads_classify_search_term(term: str) -> dict:
-        return classify_search_term(term)
+    def google_ads_classify_search_term(term: str, llm: bool = False) -> dict:
+        return classify_search_term(term, llm=llm or None)
 
     @mcp.tool()
-    def google_ads_analyze_search_terms(rows: list[dict]) -> dict:
-        return analyze_search_terms(rows)
+    def google_ads_analyze_search_terms(rows: list[dict], llm: bool = False) -> dict:
+        return analyze_search_terms(rows, llm=llm or None)
 
     @mcp.tool()
-    def google_ads_build_negative_plan(rows: list[dict], match_type: str = "phrase", level: str = "campaign") -> dict:
-        return build_negative_plan(analyze_search_terms(rows), match_type=match_type, level=level)
+    def google_ads_build_negative_plan(rows: list[dict], match_type: str = "phrase", level: str = "campaign", llm: bool = False) -> dict:
+        return build_negative_plan(analyze_search_terms(rows, llm=llm or None), match_type=match_type, level=level)
 
     return mcp
 
