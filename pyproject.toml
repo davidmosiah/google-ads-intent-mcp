@@ -35,7 +35,7 @@ google-ads-intent-mcp = "google_ads_intent_mcp.mcp_server:main"
 Homepage = "https://github.com/davidmosiah/google-ads-intent-mcp"
 Repository = "https://github.com/davidmosiah/google-ads-intent-mcp"
 Issues = "https://github.com/davidmosiah/google-ads-intent-mcp/issues"
-Email = "mailto:support@delx.ai"
+Support = "https://github.com/davidmosiah/google-ads-intent-mcp/issues"
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
