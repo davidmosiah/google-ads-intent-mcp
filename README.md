@@ -36,6 +36,10 @@ Dry-run-first Google Ads search-term intent analyzer for agents. It helps Codex,
 
 Use it when an agent needs to reduce wasted spend without accidentally excluding buyer-intent queries.
 
+## HTTP (v2 stateless)
+
+Not shipped. Optional FastMCP extra is **stdio-only** (same skip as `delx-agent-utilities`: no `/health` without extra Starlette routes). Dry-run analysis stays request-stateless over stdio.
+
 ## Why It Exists
 
 Google Ads cleanup is risky when agents act directly on accounts. This package makes the safe path the default:
