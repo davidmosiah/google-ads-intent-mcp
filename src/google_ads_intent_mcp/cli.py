@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import sys
 
 from .agent import build_agent_manifest, build_connection_status, build_privacy_audit
 from .csv_io import read_search_terms_csv
@@ -41,6 +42,10 @@ def main(argv: list[str] | None = None) -> int:
     plan.add_argument("--match-type", choices=["exact", "phrase", "broad"], default="phrase")
     plan.add_argument("--level", choices=["campaign", "ad_group"], default="campaign")
 
+    call = sub.add_parser("call")
+    call.add_argument("tool")
+    call.add_argument("--json", dest="payload", default="{}")
+
     args = parser.parse_args(argv)
     llm = args.llm or None
 
@@ -60,6 +65,19 @@ def main(argv: list[str] | None = None) -> int:
             match_type=args.match_type,
             level=args.level,
         )
+    elif args.command == "call":
+        body = json.loads(args.payload) if args.payload else {}
+        if args.tool == "google_ads_agent_manifest":
+            payload = build_agent_manifest(str(body.get("client", "generic")))
+        elif args.tool == "google_ads_connection_status":
+            payload = build_connection_status(os.environ)
+        elif args.tool == "google_ads_privacy_audit":
+            payload = build_privacy_audit()
+        elif args.tool == "google_ads_classify_search_term":
+            payload = classify_search_term(str(body["term"]), llm=llm)
+        else:
+            print(f"Unknown tool: {args.tool}", file=sys.stderr)
+            return 1
     else:
         parser.error("unknown command")
 
