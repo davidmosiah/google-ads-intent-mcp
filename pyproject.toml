@@ -23,8 +23,8 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-mcp = ["mcp>=1.13.0"]
-google-ads = ["google-ads>=29.0.0", "google-auth-oauthlib>=1.0.0", "pyyaml>=6.0"]
+mcp = ["mcp>=1.30.0,<2"]
+google-ads = ["google-ads>=29.0.0", "google-auth-oauthlib>=1.0.0", "pyyaml>=6.0", "certifi>=2026.10.19", "pyasn1>=0.6.5"]
 dev = ["pytest>=8.0"]
 
 [project.scripts]
@@ -39,3 +39,4 @@ Support = "https://github.com/davidmosiah/google-ads-intent-mcp/issues"
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
+

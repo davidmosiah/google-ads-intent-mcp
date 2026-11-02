@@ -135,7 +135,7 @@ def classify_search_term(
     value = " ".join(str(term or "").lower().split())
     metrics = metrics or {}
     conversions = _number(metrics.get("conversions", 0))
-    cost = _money(metrics.get("cost", metrics.get("cost_micros", 0)))
+    cost = _row_cost(metrics)
 
     scores = {
         "waste": _score(value, WASTE_SIGNALS, 4),
@@ -192,7 +192,7 @@ def analyze_search_terms(
     for row in rows:
         term = _pick(row, "search_term", "Search term", "search term", "Query", "query")
         metrics = {
-            "cost": _pick(row, "cost", "Cost", "cost_micros", "Cost micros", default=0),
+            "cost": _row_cost(row),
             "clicks": _pick(row, "clicks", "Clicks", default=0),
             "conversions": _pick(row, "conversions", "Conversions", "Conv.", default=0),
             "impressions": _pick(row, "impressions", "Impr.", "Impressions", default=0),
@@ -200,7 +200,7 @@ def analyze_search_terms(
         classification = classify_search_term(
             term, metrics, llm=llm, llm_classifier=llm_classifier
         )
-        cost = _money(metrics["cost"])
+        cost = _number(metrics["cost"])
         if classification["should_add_negative"]:
             wasted_cost += cost
         else:
@@ -348,13 +348,17 @@ def _pick(row: dict[str, Any], *keys: str, default: Any = "") -> Any:
 
 def _number(value: Any) -> Decimal:
     try:
-        return Decimal(str(value).replace(",", "").replace("$", "").strip() or "0")
+        number = Decimal(str(value).replace(",", "").replace("$", "").strip() or "0")
     except (InvalidOperation, ValueError):
         return Decimal("0")
-
-
-def _money(value: Any) -> Decimal:
-    number = _number(value)
-    if abs(number) > Decimal("100000"):
-        return number / Decimal("1000000")
+    if not number.is_finite():
+        raise ValueError("Metrics must be finite numbers; NaN and infinity are not supported")
     return number
+
+
+def _row_cost(row: dict[str, Any]) -> Decimal:
+    """Normalize units by column name, never by the monetary magnitude."""
+    for key in ("cost", "Cost"):
+        if key in row and row[key] not in (None, ""):
+            return _number(row[key])
+    return _number(_pick(row, "cost_micros", "Cost micros", default=0)) / Decimal("1000000")
