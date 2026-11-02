@@ -29,3 +29,9 @@ jobs:
       - run: python -m compileall -q src
       - run: pytest
 
+      - name: Verify cold-installed wheel resources
+        run: |
+          python -m pip wheel --no-deps --wheel-dir "$RUNNER_TEMP/wheels" .
+          python -m venv "$RUNNER_TEMP/wheel-test"
+          "$RUNNER_TEMP/wheel-test/bin/pip" install --no-deps "$RUNNER_TEMP"/wheels/*.whl
+          "$RUNNER_TEMP/wheel-test/bin/python" tests/verify_wheel_resources.py
