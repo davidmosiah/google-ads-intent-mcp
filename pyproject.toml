@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "google-ads-intent-mcp"
-version = "0.1.2"
+version = "0.1.3"
 description = "Dry-run-first Google Ads search-term intent analyzer with CLI and optional MCP server."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -36,6 +36,10 @@ Homepage = "https://github.com/davidmosiah/google-ads-intent-mcp"
 Repository = "https://github.com/davidmosiah/google-ads-intent-mcp"
 Issues = "https://github.com/davidmosiah/google-ads-intent-mcp/issues"
 Support = "https://github.com/davidmosiah/google-ads-intent-mcp/issues"
+[tool.hatch.build.targets.wheel.force-include]
+"skill/SKILL.md" = "google_ads_intent_mcp/skill/SKILL.md"
+"MIGRATION.md" = "google_ads_intent_mcp/MIGRATION.md"
+
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]

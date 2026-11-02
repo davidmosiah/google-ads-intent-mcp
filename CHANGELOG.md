@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3 - Candidate
+
+- Preserve cost units and explicit LLM opt-out, and reject non-finite values.
+- Restore compatibility with the patched MCP 1.x SDK (`mcp>=1.30.0,<2`).
+
 ## 0.1.2 - 2026-08-29
 
 Skill layer ships in-package (`skill/SKILL.md`). CLI `call <tool>` maps to the same MCP tool handlers.
