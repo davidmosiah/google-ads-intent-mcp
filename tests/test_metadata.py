@@ -1,5 +1,8 @@
 import json
-import tomllib
+try:
+    import tomllib
+except ModuleNotFoundError:  # Python 3.10
+    import tomli as tomllib
 from pathlib import Path
 
 
@@ -22,3 +25,4 @@ def test_agent_discovery_files_exist():
     assert (ROOT / "llms.txt").is_file()
     assert (ROOT / "examples" / "hermes.yaml").is_file()
     assert (ROOT / "examples" / "claude-desktop.json").is_file()
+
